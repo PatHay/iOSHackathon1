@@ -27,8 +27,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var possibleAliens = ["bottle1", "bottle2", "bottle3", "diaper1-1"]
     
-    let alienCategory:UInt32 = 0x1 << 1
-    let photonTorpedoCategory:UInt32 = 0x1 << 0
+//    let alienCategory:UInt32 = 0x1 << 1
+//    let photonTorpedoCategory:UInt32 = 0x1 << 0
     let itemCategory:UInt32 = 0x1 << 1 //for the items that drop down
     let playerCategory:UInt32 = 0x1 << 0 //for baby
     
@@ -71,7 +71,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         scoreLabel = SKLabelNode(text: "Score: 0")
-        scoreLabel.position = CGPoint(x: -250.0, y: 600)
+        scoreLabel.position = CGPoint(x: -UIScreen.main.bounds.width+80, y: UIScreen.main.bounds.height-50)
         scoreLabel.fontName = "AmericanTypewriter-Bold" //ios fonts
         scoreLabel.fontSize = 36
         scoreLabel.fontColor = UIColor.white
@@ -99,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let alien = SKSpriteNode(imageNamed: possibleAliens[0])
         
-        let randomAlienPosition = GKRandomDistribution(lowestValue: -((Int(UIScreen.main.bounds.width))/2), highestValue: Int(UIScreen.main.bounds.width)/2) //working now
+        let randomAlienPosition = GKRandomDistribution(lowestValue: -((Int(UIScreen.main.bounds.width))/1), highestValue: Int(UIScreen.main.bounds.width)/1) //working now
         let position = CGFloat(randomAlienPosition.nextInt())
         
         alien.position = CGPoint(x: position, y: self.frame.size.height + alien.size.height)
@@ -220,14 +220,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //movement of player
     override func didSimulatePhysics() {
-        
+        //side movement
         player.position.x += xAcceleration * 50
         
-        if player.position.x < -20 {
-            player.position = CGPoint(x: self.size.width + 20, y: player.position.y)
+        if player.position.x < -self.size.width - 20 {
+            player.position = CGPoint(x: 20, y: player.position.y)
         } else if player.position.x > self.size.width + 20{
             player.position = CGPoint(x: -20, y: player.position.y)
         }
+        
+        //forward/back movement
     }
     
     
