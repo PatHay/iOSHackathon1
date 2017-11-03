@@ -21,6 +21,7 @@
 		87B3502D1FAC05BE00DE3C79 /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 87B3502B1FAC05BD00DE3C79 /* explosion.mp3 */; };
 		87B350321FAC061C00DE3C79 /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = 87B350301FAC061C00DE3C79 /* Starfield.sks */; };
 		87B350331FAC061C00DE3C79 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 87B350311FAC061C00DE3C79 /* Explosion.sks */; };
+		87B350371FACE80400DE3C79 /* GoodExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 87B350361FACE80400DE3C79 /* GoodExplosion.sks */; };
 		89FBBF4F1FACB21E00275DAA /* ow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 89FBBF4E1FACB21D00275DAA /* ow.mp3 */; };
 		89FBBF511FACB22500275DAA /* mama.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 89FBBF501FACB22500275DAA /* mama.mp3 */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		87B3502B1FAC05BD00DE3C79 /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 		87B350301FAC061C00DE3C79 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		87B350311FAC061C00DE3C79 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		87B350361FACE80400DE3C79 /* GoodExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GoodExplosion.sks; sourceTree = "<group>"; };
 		89FBBF4E1FACB21D00275DAA /* ow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ow.mp3; sourceTree = "<group>"; };
 		89FBBF501FACB22500275DAA /* mama.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mama.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 				87B34FFC1FABFC5500DE3C79 /* GameScene.swift */,
 				87B34FFE1FABFC5500DE3C79 /* GameViewController.swift */,
 				87B350311FAC061C00DE3C79 /* Explosion.sks */,
+				87B350361FACE80400DE3C79 /* GoodExplosion.sks */,
 				87B350301FAC061C00DE3C79 /* Starfield.sks */,
 				87B350001FABFC5500DE3C79 /* Main.storyboard */,
 				89FBBF4E1FACB21D00275DAA /* ow.mp3 */,
@@ -261,6 +264,7 @@
 			files = (
 				89FBBF4F1FACB21E00275DAA /* ow.mp3 in Resources */,
 				87B350021FABFC5500DE3C79 /* Main.storyboard in Resources */,
+				87B350371FACE80400DE3C79 /* GoodExplosion.sks in Resources */,
 				87B34FF91FABFC5500DE3C79 /* GameScene.sks in Resources */,
 				89FBBF511FACB22500275DAA /* mama.mp3 in Resources */,
 				87B350321FAC061C00DE3C79 /* Starfield.sks in Resources */,
@@ -467,7 +471,7 @@
 				INFOPLIST_FILE = marbleBall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.phayes.marbleBall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phayes.spaceBaby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -483,7 +487,7 @@
 				INFOPLIST_FILE = marbleBall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.phayes.marbleBall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phayes.spaceBaby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
