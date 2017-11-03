@@ -195,6 +195,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         explosion.position = itemNode.position
         self.addChild(explosion)
         
+//        print ("-------", itemNode.texture., "-------", itemNode.name)
+        // print("---", NSLog(@"Texture: %@",[button texture]))
         self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
         
         itemNode.removeFromParent() //removing from screen

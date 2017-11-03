@@ -21,6 +21,8 @@
 		87B3502D1FAC05BE00DE3C79 /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 87B3502B1FAC05BD00DE3C79 /* explosion.mp3 */; };
 		87B350321FAC061C00DE3C79 /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = 87B350301FAC061C00DE3C79 /* Starfield.sks */; };
 		87B350331FAC061C00DE3C79 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 87B350311FAC061C00DE3C79 /* Explosion.sks */; };
+		89FBBF4F1FACB21E00275DAA /* ow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 89FBBF4E1FACB21D00275DAA /* ow.mp3 */; };
+		89FBBF511FACB22500275DAA /* mama.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 89FBBF501FACB22500275DAA /* mama.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		87B3502B1FAC05BD00DE3C79 /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 		87B350301FAC061C00DE3C79 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		87B350311FAC061C00DE3C79 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		89FBBF4E1FACB21D00275DAA /* ow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ow.mp3; sourceTree = "<group>"; };
+		89FBBF501FACB22500275DAA /* mama.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mama.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,8 @@
 				87B350311FAC061C00DE3C79 /* Explosion.sks */,
 				87B350301FAC061C00DE3C79 /* Starfield.sks */,
 				87B350001FABFC5500DE3C79 /* Main.storyboard */,
+				89FBBF4E1FACB21D00275DAA /* ow.mp3 */,
+				89FBBF501FACB22500275DAA /* mama.mp3 */,
 				87B3502B1FAC05BD00DE3C79 /* explosion.mp3 */,
 				87B3502A1FAC05BD00DE3C79 /* torpedo.mp3 */,
 				87B350031FABFC5500DE3C79 /* Assets.xcassets */,
@@ -253,8 +259,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89FBBF4F1FACB21E00275DAA /* ow.mp3 in Resources */,
 				87B350021FABFC5500DE3C79 /* Main.storyboard in Resources */,
 				87B34FF91FABFC5500DE3C79 /* GameScene.sks in Resources */,
+				89FBBF511FACB22500275DAA /* mama.mp3 in Resources */,
 				87B350321FAC061C00DE3C79 /* Starfield.sks in Resources */,
 				87B350041FABFC5500DE3C79 /* Assets.xcassets in Resources */,
 				87B350071FABFC5500DE3C79 /* LaunchScreen.storyboard in Resources */,
