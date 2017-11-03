@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
+import Foundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -194,10 +195,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let explosion = SKEmitterNode(fileNamed: "Explosion")!
         explosion.position = itemNode.position
         self.addChild(explosion)
+
+        let strFile = String(describing: itemNode.texture)
+        if (strFile.lowercased().range(of:"bottle") != nil) || (strFile.lowercased().range(of:"pacifier") != nil) {
+//            print("bottle")
+            self.run(SKAction.playSoundFileNamed("mama.mp3", waitForCompletion: false))
+            score += 5
+        } else if strFile.lowercased().range(of:"diaper") != nil {
+//            print("diaper")
+            self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+            score -= 10
+        }
         
-//        print ("-------", itemNode.texture., "-------", itemNode.name)
-        // print("---", NSLog(@"Texture: %@",[button texture]))
-        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
         
         itemNode.removeFromParent() //removing from screen
         
@@ -205,7 +214,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             explosion.removeFromParent()
         }
         
-        score += 5
+        
         
     }
     
@@ -219,9 +228,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if player.position.x > self.size.width + 20{
             player.position = CGPoint(x: -20, y: player.position.y)
         }
-        
-        
-        
     }
     
     
