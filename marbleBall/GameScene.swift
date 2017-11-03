@@ -2,8 +2,8 @@
 //  GameScene.swift
 //  marbleBall
 //
-//  Created by Patrick Hayes on 11/2/17.
-//  Copyright © 2017 Patrick Hayes. All rights reserved.
+//  Created by Chuck Kang, Elva Wang & Patrick Hayes on 11/2/17.
+//  Copyright © 2017 Chuck Kang, Elva Wang & Patrick Hayes. All rights reserved.
 //
 
 import SpriteKit
@@ -25,7 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var gameTimer: Timer!
     
-    var possibleAliens = ["bottle1", "bottle2", "bottle3", "diaper1-1"]
+    var possibleItems = ["bottle1", "bottle2", "bottle3", "diaper1-1"]
     
 //    let alienCategory:UInt32 = 0x1 << 1
 //    let photonTorpedoCategory:UInt32 = 0x1 << 0
@@ -35,13 +35,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let motionManager = CMMotionManager()
     var xAcceleration:CGFloat = 0
+//    var yAcceleration:CGFloat = 0
     
     
     
     override func didMove(to view: SKView) {
         
         starfield = SKEmitterNode(fileNamed: "Starfield")
-        starfield.position = CGPoint(x: 0, y: 1472)
+        starfield.position = CGPoint(x: 0, y: UIScreen.main.bounds.height) // changed from 1472
         starfield.advanceSimulationTime(10)
         self.addChild(starfield)
         
@@ -79,13 +80,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(scoreLabel)
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addAlien), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addItem), userInfo: nil, repeats: true)
         
         
         motionManager.accelerometerUpdateInterval = 0.2
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error: Error?) in if let accelerometerData = data {
                     let acceleration = accelerometerData.acceleration
             self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
+//            self.yAcceleration = CGFloat(acceleration.y) * 0.75 + self.yAcceleration + 0.25
             }
         }
         
@@ -94,24 +96,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    @objc func addAlien(){
-        possibleAliens = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleAliens) as! [String]
+    @objc func addItem(){
+        possibleItems = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleItems) as! [String]
         
-        let alien = SKSpriteNode(imageNamed: possibleAliens[0])
+        let item = SKSpriteNode(imageNamed: possibleItems[0])
         
-        let randomAlienPosition = GKRandomDistribution(lowestValue: -((Int(UIScreen.main.bounds.width))/1), highestValue: Int(UIScreen.main.bounds.width)/1) //working now
-        let position = CGFloat(randomAlienPosition.nextInt())
+        let randomItemPosition = GKRandomDistribution(lowestValue: -((Int(UIScreen.main.bounds.width))/1), highestValue: Int(UIScreen.main.bounds.width)/1) //working now
+        let position = CGFloat(randomItemPosition.nextInt())
         
-        alien.position = CGPoint(x: position, y: self.frame.size.height + alien.size.height)
+        item.position = CGPoint(x: position, y: self.frame.size.height + item.size.height)
         
-        alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
-        alien.physicsBody?.isDynamic = true
+        item.physicsBody = SKPhysicsBody(rectangleOf: item.size)
+        item.physicsBody?.isDynamic = true
         
-        alien.physicsBody?.categoryBitMask = itemCategory //before = alienCategory
-        alien.physicsBody?.contactTestBitMask = playerCategory  //before = photonTorpedoCategory
-        alien.physicsBody?.collisionBitMask = 0
+        item.physicsBody?.categoryBitMask = itemCategory //before = alienCategory
+        item.physicsBody?.contactTestBitMask = playerCategory  //before = photonTorpedoCategory
+        item.physicsBody?.collisionBitMask = 0
         
-        self.addChild(alien)
+        self.addChild(item)
         
         let animationDuration:TimeInterval = 6
         
@@ -120,7 +122,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         actionArray.append(SKAction.move(to: CGPoint(x: position, y: -UIScreen.main.bounds.height), duration: animationDuration)) //need to adjust y
         actionArray.append(SKAction.removeFromParent()) //when it moves off screen we remove it
         
-        alien.run(SKAction.sequence(actionArray))
+        item.run(SKAction.sequence(actionArray))
         
     }
     
@@ -193,22 +195,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func babyDidCollideWithItem (babyNode: SKSpriteNode, itemNode: SKSpriteNode){
         let explosion = SKEmitterNode(fileNamed: "Explosion")!
-        explosion.position = itemNode.position
-        self.addChild(explosion)
+        let goodExplosion = SKEmitterNode(fileNamed: "GoodExplosion")! // sparks
+//        explosion.position = itemNode.position
+//        goodExplosion.position = itemNode.position //spark position
+//        self.addChild(explosion)
+//        self.addChild(goodExplosion)
 
         let strFile = String(describing: itemNode.texture)
         if (strFile.lowercased().range(of:"bottle") != nil) || (strFile.lowercased().range(of:"pacifier") != nil) {
 //            print("bottle")
             self.run(SKAction.playSoundFileNamed("mama.mp3", waitForCompletion: false))
             score += 5
+            
+            goodExplosion.position = itemNode.position //spark position
+            self.addChild(goodExplosion)
+            
         } else if strFile.lowercased().range(of:"diaper") != nil {
 //            print("diaper")
             self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
             score -= 10
+            
+            explosion.position = itemNode.position
+            self.addChild(explosion)
         }
         
         
         itemNode.removeFromParent() //removing from screen
+        
+        self.run(SKAction.wait(forDuration: 2)) {
+            goodExplosion.removeFromParent()
+        }
         
         self.run(SKAction.wait(forDuration: 2)) {
             explosion.removeFromParent()
@@ -224,12 +240,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.position.x += xAcceleration * 50
         
         if player.position.x < -self.size.width - 20 {
-            player.position = CGPoint(x: 20, y: player.position.y)
+            player.position = CGPoint(x: self.size.width, y: player.position.y)
         } else if player.position.x > self.size.width + 20{
-            player.position = CGPoint(x: -20, y: player.position.y)
+            player.position = CGPoint(x: -self.size.width, y: player.position.y)
         }
         
         //forward/back movement
+//        player.position.y += yAcceleration * 2
+//
+//        if player.position.y < -self.size.height - 20 {
+//            player.position = CGPoint(x: player.position.x, y: self.size.height)
+//        } else if player.position.y > self.size.height + 20{
+//            player.position = CGPoint(x: player.position.x, y: self.size.height)
+//        }
     }
     
     
