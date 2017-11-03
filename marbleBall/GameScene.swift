@@ -24,7 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var gameTimer: Timer!
     
-    var possibleAliens = ["bottle1", "bottle2", "diaper1", "diaper2", "pacifier"]
+    var possibleAliens = ["bottle1", "bottle2", "bottle3", "diaper1-1"]
     
     let alienCategory:UInt32 = 0x1 << 1
     let photonTorpedoCategory:UInt32 = 0x1 << 0
@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         starfield.zPosition = -1
         
-        player = SKSpriteNode(imageNamed: "happyBaby")
+        player = SKSpriteNode(imageNamed: "baby1")
         
         
         player.position = CGPoint(x: 0.5, y: -UIScreen.main.bounds.height+70)
