@@ -35,7 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let motionManager = CMMotionManager()
     var xAcceleration:CGFloat = 0
-//    var yAcceleration:CGFloat = 0
+    var yAcceleration:CGFloat = 0
     
     
     
@@ -87,7 +87,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error: Error?) in if let accelerometerData = data {
                     let acceleration = accelerometerData.acceleration
             self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
-//            self.yAcceleration = CGFloat(acceleration.y) * 0.75 + self.yAcceleration + 0.25
+            self.yAcceleration = CGFloat(acceleration.y) * 0.75 + self.yAcceleration * 0.25
+            print(self.yAcceleration)
             }
         }
         
@@ -239,20 +240,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //side movement
         player.position.x += xAcceleration * 50
         
-        if player.position.x < -self.size.width - 20 {
+        if player.position.x < -self.size.width {
             player.position = CGPoint(x: self.size.width, y: player.position.y)
-        } else if player.position.x > self.size.width + 20{
+        } else if player.position.x > self.size.width {
             player.position = CGPoint(x: -self.size.width, y: player.position.y)
         }
         
-        //forward/back movement
-//        player.position.y += yAcceleration * 2
-//
-//        if player.position.y < -self.size.height - 20 {
-//            player.position = CGPoint(x: player.position.x, y: self.size.height)
-//        } else if player.position.y > self.size.height + 20{
-//            player.position = CGPoint(x: player.position.x, y: self.size.height)
-//        }
+//        forward/back movement
+        player.position.y += yAcceleration * 50
+
+        if player.position.y < -self.size.height {
+            player.position = CGPoint(x: player.position.x, y: self.size.height)
+        } else if player.position.y > self.size.height{
+            player.position = CGPoint(x: player.position.x, y: -self.size.height)
+        }
     }
     
     
